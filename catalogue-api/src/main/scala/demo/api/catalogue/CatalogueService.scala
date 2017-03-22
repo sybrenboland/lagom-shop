@@ -19,7 +19,7 @@ trait CatalogueService extends Service {
     import Method._
     import Service._
 
-    named("stock").withCalls(
+    named("catalogue").withCalls(
       restCall(GET, "/catalogue/:catalogueId/items", getItems _),
       restCall(POST, "/catalogue/:catalogueId/item", addItem _),
       restCall(DELETE, "/catalogue/:catalogueId/item", removeItem _)

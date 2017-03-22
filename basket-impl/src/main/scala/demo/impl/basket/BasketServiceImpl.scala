@@ -10,6 +10,7 @@ import demo.api
 import demo.api.basket
 import demo.api.basket.{Basket, BasketService}
 import demo.api.catalogue.{ExtraTransportExceptions, Item}
+import play.api.Logger
 
 import scala.collection.immutable
 import scala.concurrent.ExecutionContext
@@ -20,12 +21,15 @@ class BasketServiceImpl(persistentEntities: PersistentEntityRegistry)(implicit e
     persistentEntities.refFor[BasketEntity](basketId).ask(GetBasket)
   }
 
-  override def addItem(basketId: String): ServiceCall[Item, NotUsed] = ServiceCall { item =>
+  override def addItem(basketId: String): ServiceCall[Item, NotUsed] = ServiceCall { item => {
+    Logger.warn("Item being added: " + item.name)
+
     persistentEntities.refFor[BasketEntity](basketId).ask(AddItem(item))
       .map(_ => NotUsed)
       .recoverWith {
         case e: InvalidCommandException => throw BadRequest(e.message)
       }
+  }
   }
 
   override def removeItem(basketId: String): ServiceCall[Item, NotUsed] = ServiceCall { item =>

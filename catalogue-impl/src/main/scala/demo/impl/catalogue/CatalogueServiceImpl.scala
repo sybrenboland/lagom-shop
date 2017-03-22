@@ -16,11 +16,8 @@ class CatalogueServiceImpl(persistentEntities: PersistentEntityRegistry)(implici
   }
 
   override def addItem(catalogueId: String): ServiceCall[Item, NotUsed] = ServiceCall { item =>
-    persistentEntities.refFor[CatalogueEntity](catalogueId).ask(AddItem(item))
-      .map(_ => NotUsed)
-      .recoverWith {
-        case e: InvalidCommandException => throw BadRequest(e.message)
-      }
+      persistentEntities.refFor[CatalogueEntity](catalogueId).ask(AddItem(item))
+        .map(_ => NotUsed)
   }
 
   override def removeItem(catalogueId: String): ServiceCall[Item, NotUsed] = ServiceCall { item =>

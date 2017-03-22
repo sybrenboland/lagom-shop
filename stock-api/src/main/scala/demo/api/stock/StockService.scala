@@ -12,7 +12,7 @@ trait StockService extends Service {
     import Method._
     import Service._
 
-    named("shop-stock").withCalls(
+    named("stock").withCalls(
       restCall(POST, "/stock/:itemId/stock", addStock _)
     )
   }

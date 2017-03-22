@@ -1,0 +1,9 @@
+{
+  "name": “lagom-shop”,
+  "version": "0.0.1",
+  "description": "",
+  "engines": {
+    "node": "6.2.1"
+  },
+  "license": "UNLICENSED"
+}
