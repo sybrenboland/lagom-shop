@@ -34,28 +34,6 @@ lazy val `basket-impl` = (project in file("basket-impl"))
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(`basket-api`)
 
-lazy val `stock-api` = (project in file("stock-api"))
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslApi
-    )
-  )
-  .dependsOn(`basket-api`)
-
-lazy val `stock-impl` = (project in file("stock-impl"))
-  .enablePlugins(LagomScala)
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslPersistenceCassandra,
-      lagomScaladslKafkaBroker,
-      lagomScaladslTestKit,
-      macwire,
-      scalaTest
-    )
-  )
-  .settings(lagomForkedTestSettings: _*)
-  .dependsOn(`stock-api`, `catalogue-api`)
-
 lazy val `catalogue-api` = (project in file("catalogue-api"))
   .settings(
     libraryDependencies ++= Seq(
